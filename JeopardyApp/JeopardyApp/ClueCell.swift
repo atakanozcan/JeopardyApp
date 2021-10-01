@@ -16,17 +16,17 @@ struct ClueCell: View {
     var body: some View {
         switch state {
         case .clue:
-            Text(clue.question).font(Font.system(size: 45, weight: .bold))
-                .foregroundColor(Color(red: 230/255, green: 165/255, blue:90/255))
-                .frame(width: 180, height: 100)
+            Text(clue.question.uppercased()).font(.largeTitle)
+                .foregroundColor(Color("JeopardySecondaryColor"))
+                .frame(width: 360, height: 200)
                 .background(
-            Rectangle().fill(Color(red: 30/255, green: 30/255, blue: 187/255)))
+            Rectangle().fill(Color("JeopardyColor")))
         case .difficulty:
             Text("$" + clue.difficulty.description).font(Font.system(size: 45, weight: .bold))
-                .foregroundColor(Color(red: 230/255, green: 165/255, blue:90/255))
+                .foregroundColor(Color("JeopardySecondaryColor"))
                 .frame(width: 180, height: 100)
                 .background(
-            Rectangle().fill(Color(red: 30/255, green: 30/255, blue: 187/255)))
+                    Rectangle().fill(Color("JeopardyColor")))
         }
         
     }
@@ -36,6 +36,7 @@ struct ClueCell_Previews: PreviewProvider {
     private static let model: Model = MockModel()
 
     static var previews: some View {
-        ClueCell(clue: model.clue1!, state: .difficulty)
+        ClueCell(clue: Clue(id: 87635, difficulty: 100, category: "acting families", question: "Junius & his boys Edwin & John", answer: "O\\'Neal", answered: false)
+, state: .clue)
     }
 }

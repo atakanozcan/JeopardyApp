@@ -17,7 +17,9 @@ public class MockModel: Model {
         
         let category1 = Category(title: "acting families", id: 11496, clues: [clue1, clue2, clue3, clue4, clue5])
         
-        self.init(clue1: clue1, clue2: clue2, clue3: clue3, clue4: clue4, clue5: clue5, category: category1)
+        let jeopardy = [category1, category1, category1, category1, category1]
+        
+        self.init(currentCash: 0, jeopardy: jeopardy, doubleJeopardy: jeopardy, finalJeopardy: clue1)
         
 
     }

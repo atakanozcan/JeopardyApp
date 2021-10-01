@@ -3,20 +3,23 @@ import Combine
 
 public class Model: ObservableObject {
 
-    @Published public internal(set) var clue1: Clue?
-    @Published public internal(set) var clue2: Clue?
-    @Published public internal(set) var clue3: Clue?
-    @Published public internal(set) var clue4: Clue?
-    @Published public internal(set) var clue5: Clue?
-    @Published public internal(set) var category1: Category?
-    
+    @Published public var currentCash: Int
+    @Published public var jeopardy: [Category]
+    @Published public var doubleJeopardy: [Category]
+    @Published public var finalJeopardy: Clue
 
-    init(clue1: Clue? = nil, clue2: Clue? = nil, clue3: Clue? = nil, clue4: Clue? = nil, clue5: Clue? = nil, category: Category? = nil) {
-        self.clue1 = clue1
-        self.clue2 = clue2
-        self.clue3 = clue3
-        self.clue4 = clue4
-        self.clue5 = clue5
-        self.category1 = category
+    init(currentCash: Int, jeopardy: [Category], doubleJeopardy: [Category], finalJeopardy: Clue) {
+        self.currentCash = currentCash
+        self.jeopardy = jeopardy
+        self.doubleJeopardy = doubleJeopardy
+        self.finalJeopardy = finalJeopardy
+    }
+
+    public func category(_ id: Category.ID?) -> Category? {
+        return (jeopardy + doubleJeopardy).first(where: { $0.id == id })
+    }
+    
+    public func categories(isDoubleJeopardy: Bool) -> [Category] {
+        return isDoubleJeopardy ? doubleJeopardy : jeopardy
     }
 }

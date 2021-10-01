@@ -9,30 +9,41 @@ import SwiftUI
 import JeopardyModel
 
 struct CategoryCell: View {
-    var category: JeopardyModel.Category
+    @EnvironmentObject var model: Model
+
+    var id: JeopardyModel.Category.ID
     
     var body: some View {
         HStack {
             VStack(alignment: .leading){
                 HStack {
-                    Text(category.title.uppercased()).foregroundColor(.white)
+                    Text(model.category(id)?.title.uppercased() ?? "")
+                        .font(.headline)
+                        .foregroundColor(.white)
                 }
                 HStack {
-                   ForEach(category.clues) { clue in
-                       clue.answered ? nil : Text("$" + clue.difficulty.description).foregroundColor((Color(red: 230/255, green: 165/255, blue:90/255)))
+                    ForEach(model.category(id)?.clues ?? []) { clue in
+                       clue.answered ? nil : Text("$" + clue.difficulty.description).foregroundColor(Color("JeopardySecondaryColor"))
                     }
                 }
             }
-            Image(systemName: "chevron.right").foregroundColor(.white)
-        }.padding(5)
-            .background(Rectangle().fill(Color(red: 30/255, green: 30/255, blue: 187/255)))
+            Spacer()
+            Image(systemName: "chevron.right")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+                .frame(width: 7)
+                .foregroundColor(.white)
+        }.padding(15)
+        .background(Rectangle().fill(Color("JeopardyColor")))
     }
 }
 
 struct CategoryCell_Previews: PreviewProvider {
     private static let model: Model = MockModel()
+    private static var categoryId = model.jeopardy[0].id
 
+    
     static var previews: some View {
-        CategoryCell(category: model.category1!)
+        CategoryCell(id: categoryId).environmentObject(model)
     }
 }

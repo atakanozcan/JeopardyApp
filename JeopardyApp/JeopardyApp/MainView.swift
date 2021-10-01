@@ -9,7 +9,11 @@ import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        Text("Welcome to Jeopardy")
+        VStack {
+            Text("Welcome to Jeopardy")
+//Button("Start Game", action:)
+        }
+        
         
     }
 }
