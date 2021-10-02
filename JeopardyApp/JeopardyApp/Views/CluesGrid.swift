@@ -10,7 +10,8 @@ import JeopardyModel
 
 struct CluesGrid: View {
     @ObservedObject private var viewModel: CluesGridViewModel
-        
+    @State private var selectedClue: Clue? = nil
+
     let columns = [
         GridItem(.adaptive(minimum: 400))
     ]
@@ -22,11 +23,16 @@ struct CluesGrid: View {
     var body: some View {
         VStack {
             Text(viewModel.clues.first?.category.uppercased() ?? "")
-            LazyVGrid(columns: columns, spacing: 2) {
+            LazyVGrid(columns: columns, spacing: 0) {
                 ForEach(viewModel.clues) { clue in
                     ClueCell(clue: clue, state: .difficulty)
+                        .onTapGesture {
+                            selectedClue = clue
+                        }
                 }
             }
+        }.sheet(item: $selectedClue) { item
+            in QuestionView(item, viewModel: self.viewModel)
         }
     }
 }

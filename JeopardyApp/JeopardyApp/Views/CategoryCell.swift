@@ -18,7 +18,7 @@ struct CategoryCell: View {
             VStack(alignment: .leading){
                 HStack {
                     Text(model.category(id)?.title.uppercased() ?? "")
-                        .font(.headline)
+                        .font(.custom("HelveticaNeue", size: 24).bold())
                         .foregroundColor(.white)
                 }
                 HStack {

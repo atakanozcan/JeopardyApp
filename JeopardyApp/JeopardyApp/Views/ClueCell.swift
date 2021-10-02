@@ -22,15 +22,14 @@ struct ClueCell: View {
                 .foregroundColor(Color("JeopardySecondaryColor"))
                 .frame(width: 360, height: 200)
                 .background(
-            Rectangle().fill(Color("JeopardyColor")))
+                    Rectangle().fill(Color("JeopardyColor"))).border(Color.black, width: 3)
         case .difficulty:
-            Text("$" + clue.difficulty.description).font(Font.system(size: 45, weight: .bold))
+            Text("$" + clue.difficulty.description).font(.custom("HelveticaNeue", size: 45).bold())
                 .foregroundColor(Color("JeopardySecondaryColor"))
                 .frame(width: 180, height: 100)
                 .background(
-                    Rectangle().fill(Color("JeopardyColor")))
+                    Rectangle().fill(Color("JeopardyColor"))).border(Color.black, width: 3)
         }
-        
     }
 }
 
