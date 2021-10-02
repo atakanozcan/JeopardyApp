@@ -24,43 +24,42 @@ struct QuestionView: View {
         ZStack {
             Color("JeopardyDarkBlue")
                 .ignoresSafeArea()
-                    
-                    // Your other content here
-                    // Other layers will respect the safe area edges
-        VStack {
-            Spacer()
-                        
-            ClueCell(clue: clue, state: .clue)
-            
-            Spacer()
-            
-            VStack{
-                HStack {
-                    TextEditor(text: $text)
-                        .placeholder(when: text.isEmpty) {
-                            Text("What is...").foregroundColor(Color("JeopardySecondaryColor")).padding()
-
-                        }
-                        .foregroundColor(Color.white)
-                        .padding(10)
-                        .frame(width: 250, height: 100, alignment: .center)
-                    
-                       
-                    Image(systemName: "questionmark.square.fill").foregroundColor(Color("JeopardySecondaryColor"))
-                        .padding(12)
-                }
-                .background(
-                    RoundedRectangle(cornerRadius: 2).fill(Color("JeopardyColor"))).border(Color.black, width: 3)
-                .padding(20)
+            VStack {
+                Spacer()
                 
-                Button("Submit") {
-                    print("some stuff")
-                }.foregroundColor(Color("JeopardySecondaryBlue"))
+                ClueCell(clue: clue, state: .clue)
+                                
+                Spacer()
+                
+                VStack{
+                    HStack {
+                        TextEditor(text: $text)
+                            .placeholder(when: text.isEmpty) {
+                                Text("What is...").foregroundColor(Color("JeopardySecondaryColor")).padding()
+                                
+                            }
+                            .foregroundColor(Color.white)
+                            .padding(10)
+                            .frame(width: 250, height: 100, alignment: .center)
+                        
+                        
+                        Image(systemName: "questionmark.square.fill")
+                            .foregroundColor(Color("JeopardySecondaryColor"))
+                            .padding(12)
 
+                    }
+                    .background(
+                        RoundedRectangle(cornerRadius: 2).fill(Color("JeopardyColor"))).border(Color.black, width: 3)
+                        .padding(20)
+                    
+                    Button("Submit") {
+                        viewModel.answer(clueId: clue.id)
+                    }.foregroundColor(Color("JeopardySecondaryBlue"))
+                    
+                }
+                
+                Spacer()
             }
-            
-            Spacer()
-        }
         }
     }
 }
@@ -71,12 +70,12 @@ extension View {
         when shouldShow: Bool,
         alignment: Alignment = .leading,
         @ViewBuilder placeholder: () -> Content) -> some View {
-
-        ZStack(alignment: alignment) {
-            placeholder().opacity(shouldShow ? 1 : 0)
-            self
+            
+            ZStack(alignment: alignment) {
+                placeholder().opacity(shouldShow ? 1 : 0)
+                self
+            }
         }
-    }
 }
 
 struct QuestionView_Previews: PreviewProvider {
