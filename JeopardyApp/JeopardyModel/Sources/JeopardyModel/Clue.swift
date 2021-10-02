@@ -8,11 +8,11 @@
 import Foundation
 
 public struct Clue: Identifiable {
-    public var id: Int
-    public var difficulty: Int
-    public var category: String
-    public var question: String
-    public var answer: String
+    public let id: Int
+    public let difficulty: Int
+    public let category: String
+    public let question: String
+    public let answer: String
     public var answered: Bool
     
     public init(id: Int, difficulty: Int, category: String, question: String, answer: String, answered: Bool) {

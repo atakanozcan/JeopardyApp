@@ -13,12 +13,15 @@
 		009B49CE2705198A00515AB4 /* JeopardyModel in Frameworks */ = {isa = PBXBuildFile; productRef = 009B49CD2705198A00515AB4 /* JeopardyModel */; };
 		009B49D42705EE3800515AB4 /* CluesGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B49D32705EE3800515AB4 /* CluesGrid.swift */; };
 		009B49D62705EFAF00515AB4 /* CategoriesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B49D52705EFAF00515AB4 /* CategoriesViewModel.swift */; };
+		009B49DB2707388D00515AB4 /* CluesGridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B49DA2707388D00515AB4 /* CluesGridViewModel.swift */; };
+		009B49DD270751C200515AB4 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B49DC270751C200515AB4 /* QuestionView.swift */; };
+		009B49DF2707562000515AB4 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B49DE2707562000515AB4 /* GameViewModel.swift */; };
 		00C311052704820B0068B350 /* JeopardyAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C311042704820B0068B350 /* JeopardyAppApp.swift */; };
 		00C311072704820B0068B350 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C311062704820B0068B350 /* ContentView.swift */; };
 		00C311092704820D0068B350 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00C311082704820D0068B350 /* Assets.xcassets */; };
 		00C3110C2704820D0068B350 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00C3110B2704820D0068B350 /* Preview Assets.xcassets */; };
 		00C31114270482990068B350 /* ClueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C31113270482990068B350 /* ClueCell.swift */; };
-		00C3111C2704A7830068B350 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C3111B2704A7830068B350 /* MainView.swift */; };
+		00C3111C2704A7830068B350 /* GameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C3111B2704A7830068B350 /* GameView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		009B49D22705BB9500515AB4 /* JeopardyModel */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JeopardyModel; sourceTree = "<group>"; };
 		009B49D32705EE3800515AB4 /* CluesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CluesGrid.swift; sourceTree = "<group>"; };
 		009B49D52705EFAF00515AB4 /* CategoriesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesViewModel.swift; sourceTree = "<group>"; };
+		009B49DA2707388D00515AB4 /* CluesGridViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CluesGridViewModel.swift; sourceTree = "<group>"; };
+		009B49DC270751C200515AB4 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
+		009B49DE2707562000515AB4 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
 		00C311012704820B0068B350 /* JeopardyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JeopardyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00C311042704820B0068B350 /* JeopardyAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JeopardyAppApp.swift; sourceTree = "<group>"; };
 		00C311062704820B0068B350 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -35,7 +41,7 @@
 		00C3110B2704820D0068B350 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		00C3110D2704820D0068B350 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00C31113270482990068B350 /* ClueCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClueCell.swift; sourceTree = "<group>"; };
-		00C3111B2704A7830068B350 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		00C3111B2704A7830068B350 /* GameView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +61,29 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		009B49D82707386100515AB4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				00C3111B2704A7830068B350 /* GameView.swift */,
+				009B49C427050CAF00515AB4 /* CategoriesList.swift */,
+				009B49D32705EE3800515AB4 /* CluesGrid.swift */,
+				00C31113270482990068B350 /* ClueCell.swift */,
+				009B49C8270511B200515AB4 /* CategoryCell.swift */,
+				009B49DC270751C200515AB4 /* QuestionView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		009B49D92707387C00515AB4 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				009B49D52705EFAF00515AB4 /* CategoriesViewModel.swift */,
+				009B49DA2707388D00515AB4 /* CluesGridViewModel.swift */,
+				009B49DE2707562000515AB4 /* GameViewModel.swift */,
+			);
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		00C310F82704820B0068B350 = {
@@ -78,18 +107,14 @@
 		00C311032704820B0068B350 /* JeopardyApp */ = {
 			isa = PBXGroup;
 			children = (
+				009B49D82707386100515AB4 /* Views */,
 				00C311042704820B0068B350 /* JeopardyAppApp.swift */,
 				00C311062704820B0068B350 /* ContentView.swift */,
 				00C311082704820D0068B350 /* Assets.xcassets */,
 				00C3110D2704820D0068B350 /* Info.plist */,
 				00C3110A2704820D0068B350 /* Preview Content */,
-				00C31113270482990068B350 /* ClueCell.swift */,
-				00C3111B2704A7830068B350 /* MainView.swift */,
-				009B49C427050CAF00515AB4 /* CategoriesList.swift */,
 				009B49C627050EE700515AB4 /* CellState.swift */,
-				009B49C8270511B200515AB4 /* CategoryCell.swift */,
-				009B49D32705EE3800515AB4 /* CluesGrid.swift */,
-				009B49D52705EFAF00515AB4 /* CategoriesViewModel.swift */,
+				009B49D92707387C00515AB4 /* ViewModels */,
 			);
 			path = JeopardyApp;
 			sourceTree = "<group>";
@@ -174,13 +199,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				009B49DF2707562000515AB4 /* GameViewModel.swift in Sources */,
 				009B49C527050CAF00515AB4 /* CategoriesList.swift in Sources */,
-				00C3111C2704A7830068B350 /* MainView.swift in Sources */,
+				00C3111C2704A7830068B350 /* GameView.swift in Sources */,
 				00C311072704820B0068B350 /* ContentView.swift in Sources */,
 				00C311052704820B0068B350 /* JeopardyAppApp.swift in Sources */,
 				009B49D42705EE3800515AB4 /* CluesGrid.swift in Sources */,
 				009B49C727050EE700515AB4 /* CellState.swift in Sources */,
 				00C31114270482990068B350 /* ClueCell.swift in Sources */,
+				009B49DD270751C200515AB4 /* QuestionView.swift in Sources */,
+				009B49DB2707388D00515AB4 /* CluesGridViewModel.swift in Sources */,
 				009B49D62705EFAF00515AB4 /* CategoriesViewModel.swift in Sources */,
 				009B49C9270511B200515AB4 /* CategoryCell.swift in Sources */,
 			);

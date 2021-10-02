@@ -6,6 +6,7 @@
 //
 import Foundation
 import JeopardyModel
+import SwiftUI
 
 class CategoriesViewModel: ObservableObject {
 

@@ -9,10 +9,10 @@ import SwiftUI
 import JeopardyModel
 
 struct CategoriesList: View {
+    @EnvironmentObject var model: JeopardyModel.Model
     @ObservedObject private var viewModel: CategoriesViewModel
-
     
-    init(_ model: Model, isDoubleJeopardy: Bool) {
+    init(_ model: JeopardyModel.Model, isDoubleJeopardy: Bool) {
         viewModel = CategoriesViewModel(model, isDoubleJeopardy: isDoubleJeopardy)
     }
     
@@ -20,7 +20,7 @@ struct CategoriesList: View {
         List {
             ForEach(viewModel.categories) { category in
                 CategoryCell(id: category.id).background(
-                    NavigationLink(destination: CluesGrid(clues: category.clues)) {}
+                    NavigationLink(destination: CluesGrid(model, categoryId: category.id)) {}
                        .opacity(0)
                 ).listRowBackground( Rectangle().fill(Color("JeopardyColor"))).listRowSeparatorTint(.black)
             }

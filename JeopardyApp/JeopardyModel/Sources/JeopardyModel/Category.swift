@@ -8,9 +8,9 @@
 import Foundation
 
 public struct Category: Identifiable {
-    public var title: String
-    public var id: Int
-    public var clues: [Clue]
+    public let title: String
+    public let id: Int
+    public let clues: [Clue]
 
     public init(title: String, id: Int, clues: [Clue]) {
         self.title = title
