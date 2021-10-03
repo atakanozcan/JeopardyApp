@@ -12,7 +12,7 @@ struct CluesGrid: View {
     @ObservedObject var viewModel: CluesGridViewModel
     @EnvironmentObject var model: JeopardyModel.Model
     @State var openSheet: Bool = false
-    @State var selectedClueIdx: Int?
+    @State var selectedClueIdx: Int? = nil
     
     init(viewModel: CluesGridViewModel) {
         self.viewModel = viewModel
@@ -29,18 +29,21 @@ struct CluesGrid: View {
                 ForEach(viewModel.clues.indices,  id: \.self) { index in
                     ClueCell(viewModel: viewModel, idx: index, state: .difficulty)
                         .onTapGesture {
-                            selectedClueIdx = index
-                           if !(viewModel.isClueAnswered(index)) {
-                               viewModel.answerCorrectly(index)
-                               openSheet.toggle()
+                            if !(viewModel.answeredClues.contains(where: { $0.id == viewModel.clues[index].id })) {
+                                self.selectedClueIdx = index
                            }
                         }
                 }
             }
-        }.sheet(isPresented: $openSheet) { QuestionView(viewModel: self.viewModel, clueIdx: self.selectedClueIdx ?? 0)
+        }.sheet(item: $selectedClueIdx) { QuestionView(viewModel: self.viewModel, clueIdx: $0)
         }
     }
 }
+
+extension Int: Identifiable {
+    public var id: Int { self }
+}
+
 
 struct CluesGrid_Previews: PreviewProvider {
     private static let model: Model = MockModel()

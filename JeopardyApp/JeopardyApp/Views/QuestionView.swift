@@ -54,6 +54,7 @@ struct QuestionView: View {
                         .padding(20)
                     
                     Button("Submit") {
+                        viewModel.answer(clueIdx, text)
                         presentationMode.wrappedValue.dismiss()
                     }.foregroundColor(Color("JeopardySecondaryBlue"))
                     

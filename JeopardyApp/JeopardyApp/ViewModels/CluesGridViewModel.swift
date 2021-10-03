@@ -35,12 +35,19 @@ class CluesGridViewModel: ObservableObject {
         "$" + clues[idx].difficulty.description
     }
     
-    public func isClueAnswered(_ idx: Int) -> Bool {
-        model.answeredClues.contains(where: {$0.id == clues[idx].id})
+    public var answeredClues: [Clue] {
+        var answered = [Clue]()
+    
+        for clue in clues {
+            if model.answeredClues.contains(where: {$0.id == clue.id}) {
+                answered.append(clue)
+            }
+        }
+        return answered
     }
     
-    public func answerCorrectly(_ clueIdx: Int) {
-        model.answerCorrectly(categoryId: self.categoryId, clueId: clues[clueIdx].id)
+    public func answer(_ clueIdx: Int, _ answer: String) {
+        model.answer(categoryId: self.categoryId, clueId: self.clues[clueIdx].id, answer: answer)
     }
 //    var selectedClue: JeopardyModel.Clue? {
 //        model?.clue(categoryId: categoryId, clueId: selectedClueId)

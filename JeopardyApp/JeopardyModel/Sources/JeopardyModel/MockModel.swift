@@ -9,7 +9,7 @@ import Foundation
 
 public class MockModel: Model {
     public convenience init() {
-        let clue11 = Clue(id: 87635, difficulty: 100, category: "acting families", question: "Ryan & Tatum", answer: "O\\'Neal")
+        let clue11 = Clue(id: 87635, difficulty: 100, category: "acting families", question: "Ryan & Tatum", answer: "O'Neal")
         let clue12 = Clue(id: 87641, difficulty: 200, category: "acting families", question: "BrothersBen & Casey", answer: "Affleck")
         let clue13 = Clue(id: 87647, difficulty: 300, category: "acting families", question: "Dad & sonFreddie", answer: "Prinze")
         let clue14 = Clue(id: 87653, difficulty: 400, category: "acting families", question: "Efrem & Stephanie", answer: "Zimbalist")

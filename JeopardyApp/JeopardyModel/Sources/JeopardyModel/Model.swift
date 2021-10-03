@@ -29,19 +29,15 @@ public class Model: ObservableObject {
         return category(categoryId)?.clues.first(where: { $0.id == clueId })
     }
         
-    public func answerCorrectly(categoryId: Category.ID, clueId: Clue.ID?) {
+    public func answer(categoryId: Category.ID, clueId: Clue.ID?, answer: String) {
         objectWillChange.send()
         if let clue = clue(categoryId: categoryId, clueId: clueId) {
             answeredClues.append(clue)
-            currentCash += clue.difficulty
-        }
-    }
-    
-    public func answerFalsely(categoryId: Category.ID, clueId: Clue.ID) {
-        objectWillChange.send()
-        if let clue = clue(categoryId: categoryId, clueId: clueId) {
-            answeredClues.append(clue)
-            currentCash -= clue.difficulty
+            if answer.caseInsensitiveCompare(clue.answer) == .orderedSame {
+                currentCash += clue.difficulty
+            } else {
+                currentCash -= clue.difficulty
+            }
         }
     }
     

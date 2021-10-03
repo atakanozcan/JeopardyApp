@@ -26,7 +26,7 @@ struct ClueCell: View {
                 .background(
                     Rectangle().fill(Color("JeopardyColor"))).border(Color.black, width: 3)
         case .difficulty:
-            if viewModel.isClueAnswered(idx) {
+            if viewModel.answeredClues.contains(where: { $0.id == self.viewModel.clues[idx].id }) {
                 Rectangle()
                     .fill(Color("JeopardyColor"))
                     .frame(width: 180, height: 100)
