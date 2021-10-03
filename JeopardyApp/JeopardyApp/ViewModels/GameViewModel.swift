@@ -6,3 +6,12 @@
 //
 
 import Foundation
+import JeopardyModel
+import SwiftUI
+
+class GameViewModel: ObservableObject {
+    @StateObject var model = MockModel()
+    
+    
+    
+}

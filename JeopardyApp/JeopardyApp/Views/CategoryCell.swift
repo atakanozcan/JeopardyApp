@@ -9,21 +9,20 @@ import SwiftUI
 import JeopardyModel
 
 struct CategoryCell: View {
-    @EnvironmentObject var model: Model
-
-    var id: JeopardyModel.Category.ID
+    @Binding var category: JeopardyModel.Category
+    @ObservedObject var viewModel: CategoriesViewModel
     
     var body: some View {
         HStack {
             VStack(alignment: .leading){
                 HStack {
-                    Text(model.category(id)?.title.uppercased() ?? "")
+                    Text(viewModel.getCategoryTitleWith(category.id))
                         .font(.custom("HelveticaNeue", size: 24).bold())
                         .foregroundColor(.white)
                 }
                 HStack {
-                    ForEach(model.category(id)?.clues ?? []) { clue in
-                       clue.answered ? nil : Text("$" + clue.difficulty.description).foregroundColor(Color("JeopardySecondaryColor"))
+                    ForEach(viewModel.getClueAmountForCategoryWith(category.id).indices, id: \.self) {
+                        Text(viewModel.getClueAmountForCategoryWith(category.id)[$0]).foregroundColor(Color("JeopardySecondaryColor"))
                     }
                 }
             }
@@ -40,10 +39,8 @@ struct CategoryCell: View {
 
 struct CategoryCell_Previews: PreviewProvider {
     private static let model: Model = MockModel()
-    private static var categoryId = model.jeopardy[0].id
-
     
     static var previews: some View {
-        CategoryCell(id: categoryId).environmentObject(model)
+        CategoryCell(category: .constant(model.jeopardy.first!), viewModel: CategoriesViewModel(model, isDoubleJeopardy: true))
     }
 }

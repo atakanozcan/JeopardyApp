@@ -9,26 +9,35 @@ import SwiftUI
 import JeopardyModel
 
 struct ClueCell: View {
-    var clue: JeopardyModel.Clue
+    @ObservedObject var viewModel: CluesGridViewModel
+    var idx: Int
     var state: CellState
     
     
     var body: some View {
         switch state {
         case .clue:
-            Text(clue.question.uppercased())
+            Text(viewModel.getQuestionWithClue(idx))
                 .multilineTextAlignment(.center)
-                .font(.largeTitle)
-                .foregroundColor(Color("JeopardySecondaryColor"))
+                .font(.headline)
+                .foregroundColor(.white)
+                .padding()
                 .frame(width: 360, height: 200)
                 .background(
                     Rectangle().fill(Color("JeopardyColor"))).border(Color.black, width: 3)
         case .difficulty:
-            Text("$" + clue.difficulty.description).font(.custom("HelveticaNeue", size: 45).bold())
+            if viewModel.isClueAnswered(idx) {
+                Rectangle()
+                    .fill(Color("JeopardyColor"))
+                    .frame(width: 180, height: 100)
+                    .border(Color.black, width: 3)
+            } else {
+                Text(viewModel.getDifficultyOfClue(idx)).font(.custom("HelveticaNeue", size: 45).bold())
                 .foregroundColor(Color("JeopardySecondaryColor"))
                 .frame(width: 180, height: 100)
                 .background(
                     Rectangle().fill(Color("JeopardyColor"))).border(Color.black, width: 3)
+            }
         }
     }
 }
@@ -37,7 +46,6 @@ struct ClueCell_Previews: PreviewProvider {
     private static let model: Model = MockModel()
 
     static var previews: some View {
-        ClueCell(clue: Clue(id: 87635, difficulty: 100, category: "acting families", question: "Ronny & the Daytonas wanted to turn it on, wind it up & blow it out", answer: "O\\'Neal", answered: false)
-, state: .clue)
+        ClueCell(viewModel: CluesGridViewModel(model, model.jeopardy.first?.id ?? 0), idx: 0, state: .clue)
     }
 }

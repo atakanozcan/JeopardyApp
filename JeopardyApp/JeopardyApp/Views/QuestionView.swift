@@ -9,14 +9,15 @@ import SwiftUI
 import JeopardyModel
 
 struct QuestionView: View {
-    var clue: JeopardyModel.Clue
-    @State var text: String = ""
-    @ObservedObject private var viewModel: CluesGridViewModel
+    @Environment(\.presentationMode) var presentationMode
 
-    
-    init(_ clue: JeopardyModel.Clue, viewModel: CluesGridViewModel) {
-        self.clue = clue
+    @ObservedObject private var viewModel: CluesGridViewModel
+    var clueIdx: Int
+    @State var text: String = ""
+
+    init(viewModel: CluesGridViewModel, clueIdx: Int) {
         self.viewModel = viewModel
+        self.clueIdx = clueIdx
         UITextView.appearance().backgroundColor = .clear
     }
     
@@ -27,7 +28,7 @@ struct QuestionView: View {
             VStack {
                 Spacer()
                 
-                ClueCell(clue: clue, state: .clue)
+                ClueCell(viewModel: self.viewModel, idx: self.clueIdx, state: .clue)
                                 
                 Spacer()
                 
@@ -35,7 +36,7 @@ struct QuestionView: View {
                     HStack {
                         TextEditor(text: $text)
                             .placeholder(when: text.isEmpty) {
-                                Text("What is...").foregroundColor(Color("JeopardySecondaryColor")).padding()
+                                Text("What is...").foregroundColor(Color("JeopardySecondaryColor")).padding(10)
                                 
                             }
                             .foregroundColor(Color.white)
@@ -45,15 +46,15 @@ struct QuestionView: View {
                         
                         Image(systemName: "questionmark.square.fill")
                             .foregroundColor(Color("JeopardySecondaryColor"))
-                            .padding(12)
-
+                            .padding(10).font(.system(size: 25))
+                            .frame(alignment: .topTrailing)
                     }
                     .background(
                         RoundedRectangle(cornerRadius: 2).fill(Color("JeopardyColor"))).border(Color.black, width: 3)
                         .padding(20)
                     
                     Button("Submit") {
-                        viewModel.answer(clueId: clue.id)
+                        presentationMode.wrappedValue.dismiss()
                     }.foregroundColor(Color("JeopardySecondaryBlue"))
                     
                 }
@@ -68,7 +69,7 @@ struct QuestionView: View {
 extension View {
     func placeholder<Content: View>(
         when shouldShow: Bool,
-        alignment: Alignment = .leading,
+        alignment: Alignment = .topLeading,
         @ViewBuilder placeholder: () -> Content) -> some View {
             
             ZStack(alignment: alignment) {
@@ -81,6 +82,6 @@ extension View {
 struct QuestionView_Previews: PreviewProvider {
     private static let model:Model = MockModel()
     static var previews: some View {
-        QuestionView(model.jeopardy.first?.clues.first ?? Clue(id: 0, difficulty: 0, category: "", question: "", answer: "", answered: false) , viewModel: CluesGridViewModel(model, categoryId: model.jeopardy.first?.id ?? 0))
+        QuestionView(viewModel: CluesGridViewModel(model, model.jeopardy.first?.id ?? 0), clueIdx: 0)
     }
 }

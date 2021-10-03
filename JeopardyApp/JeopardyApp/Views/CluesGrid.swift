@@ -9,30 +9,35 @@ import SwiftUI
 import JeopardyModel
 
 struct CluesGrid: View {
-    @ObservedObject private var viewModel: CluesGridViewModel
-    @State private var selectedClue: Clue? = nil
-
+    @ObservedObject var viewModel: CluesGridViewModel
+    @EnvironmentObject var model: JeopardyModel.Model
+    @State var openSheet: Bool = false
+    @State var selectedClueIdx: Int?
+    
+    init(_ model: JeopardyModel.Model, _ categoryId: Int) {
+        viewModel = CluesGridViewModel(model, categoryId)
+    }
+    
     let columns = [
         GridItem(.adaptive(minimum: 400))
     ]
     
-    init(_ model: JeopardyModel.Model, categoryId: Int){
-        viewModel = CluesGridViewModel(model, categoryId: categoryId)
-    }
-    
     var body: some View {
         VStack {
-            Text(viewModel.clues.first?.category.uppercased() ?? "")
+            Text(viewModel.categoryTitle)
             LazyVGrid(columns: columns, spacing: 0) {
-                ForEach(viewModel.clues) { clue in
-                    ClueCell(clue: clue, state: .difficulty)
+                ForEach(viewModel.clues.indices,  id: \.self) { index in
+                    ClueCell(viewModel: viewModel, idx: index, state: .difficulty)
                         .onTapGesture {
-                            selectedClue = clue
+                            selectedClueIdx = index
+                           if !(viewModel.isClueAnswered(index)) {
+                               viewModel.answerCorrectly(index)
+                               openSheet.toggle()
+                           }
                         }
                 }
             }
-        }.sheet(item: $selectedClue) { item
-            in QuestionView(item, viewModel: self.viewModel)
+        }.sheet(isPresented: $openSheet) { QuestionView(viewModel: self.viewModel, clueIdx: self.selectedClueIdx ?? 0)
         }
     }
 }
@@ -41,7 +46,7 @@ struct CluesGrid_Previews: PreviewProvider {
     private static let model: Model = MockModel()
 
     static var previews: some View {
-        CluesGrid(model, categoryId: model.jeopardy.first?.id ?? 0)
+        CluesGrid(model, model.jeopardy.first?.id ?? 0).environmentObject(model)
         
     }
 }

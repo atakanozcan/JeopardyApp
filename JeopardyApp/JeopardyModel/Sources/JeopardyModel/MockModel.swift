@@ -9,17 +9,27 @@ import Foundation
 
 public class MockModel: Model {
     public convenience init() {
-        let clue1 = Clue(id: 87635, difficulty: 100, category: "acting families", question: "Ryan & Tatum", answer: "O\\'Neal", answered: false)
-        let clue2 = Clue(id: 87641, difficulty: 200, category: "acting families", question: "BrothersBen & Casey", answer: "Affleck", answered: false)
-        let clue3 = Clue(id: 87647, difficulty: 300, category: "acting families", question: "Dad & sonFreddie", answer: "Prinze", answered: false)
-        let clue4 = Clue(id: 87653, difficulty: 400, category: "acting families", question: "Efrem & Stephanie", answer: "Zimbalist", answered: false)
-        let clue5 = Clue(id: 87659, difficulty: 500, category: "acting families", question: "Junius & his boys Edwin & John", answer: "Booth", answered: false)
+        let clue11 = Clue(id: 87635, difficulty: 100, category: "acting families", question: "Ryan & Tatum", answer: "O\\'Neal")
+        let clue12 = Clue(id: 87641, difficulty: 200, category: "acting families", question: "BrothersBen & Casey", answer: "Affleck")
+        let clue13 = Clue(id: 87647, difficulty: 300, category: "acting families", question: "Dad & sonFreddie", answer: "Prinze")
+        let clue14 = Clue(id: 87653, difficulty: 400, category: "acting families", question: "Efrem & Stephanie", answer: "Zimbalist")
+        let clue15 = Clue(id: 87659, difficulty: 500, category: "acting families", question: "Junius & his boys Edwin & John", answer: "Booth")
         
-        let category1 = Category(title: "acting families", id: 11496, clues: [clue1, clue2, clue3, clue4, clue5])
         
-        let jeopardy = [category1, category1, category1, category1, category1, category1]
+        let clue21 = Clue(id: 87638, difficulty: 100, category: "tough-pourri", question: "Students are allowed to bring a toad, a cat or an owl to this fictional boarding school", answer: "Hogwarts")
+        let clue22 = Clue(id: 87644, difficulty: 200, category: "tough-pourri", question: "This last Ivy-League school to win this college football bowl game was Columbia University in 1934", answer: "the Rose Bowl")
+        let clue23 = Clue(id: 87650, difficulty: 300, category: "tough-pourri", question: "When \"Face The Nation\" premiered in 1954, this first guest was grilled over comments he had been making about the Army", answer: "Senator Joe McCarthy")
+        let clue24 = Clue(id: 87656, difficulty: 400, category: "tough-pourri", question: "In 1907, the first 4 groups in this org. started in England were the Bulls, the Wolves, the Curlews & the Ravens", answer: "Boy Scouts")
+        let clue25 = Clue(id: 87662, difficulty: 500, category: "tough-pourri", question: "On this date in 1999, England's Guardian newspaper announced a coup in the nation of San Seriffe", answer: "April 1st")
         
-        self.init(currentCash: 0, jeopardy: jeopardy, doubleJeopardy: jeopardy, finalJeopardy: clue1)
+        let category1 = Category(title: "acting families", id: 11496, clues: [clue11, clue12, clue13, clue14, clue15])
+        let category2 = Category(title: "tough-pourri", id: 11499, clues: [clue21, clue22, clue23, clue24, clue25])
+
+
+
+        let jeopardy = [category1, category2, category1, category2, category1, category2]
+        
+        self.init(currentCash: 0, jeopardy: jeopardy, doubleJeopardy: jeopardy, finalJeopardy: clue11)
         
 
     }
