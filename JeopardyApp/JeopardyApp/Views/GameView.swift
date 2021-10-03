@@ -13,14 +13,24 @@ struct GameView: View {
     @EnvironmentObject var model: Model
     
     var body: some View {
-        NavigationView {
-            VStack {
-                Text("Welcome to Jeopardy")
-                NavigationLink(destination: CategoriesList(viewModel: CategoriesViewModel(self.model, isDoubleJeopardy: false))) {
+        VStack {
+            NavigationView {
+                VStack {
+                    Text("Welcome to Jeopardy")
+                    NavigationLink(destination: CategoriesList(viewModel: CategoriesViewModel(self.model, isDoubleJeopardy: false))) {
                         Text("Start Game")
+                    }
                 }
             }
+            VStack {
+                HStack {
+                    Text("Current Cash:")
+                    Text(model.currentCash.description)
+                }
+            }
+            Spacer()
         }
+        
     }
 }
 

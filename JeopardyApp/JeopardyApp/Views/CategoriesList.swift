@@ -18,22 +18,22 @@ struct CategoriesList: View {
     
     var body: some View {
         VStack {
-            Text(model.currentCash.description)
             List {
                 ForEach($viewModel.categories) { $category in
                     CategoryCell(category: $category, viewModel: viewModel).background(
                         NavigationLink(destination: CluesGrid(viewModel: CluesGridViewModel(self.model, category.id))) {}
+                            .disabled(viewModel.getClueAmountForCategoryWith(category.id).isEmpty)
                             .opacity(0)
                     ).listRowBackground( Rectangle().fill(Color("JeopardyColor"))).listRowSeparatorTint(.black)
                 }
             }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 
 struct CategoriesList_Previews: PreviewProvider {
     private static let model: Model = MockModel()
-
+    
     static var previews: some View {
         NavigationView {
             CategoriesList(viewModel: CategoriesViewModel(model, isDoubleJeopardy: true))

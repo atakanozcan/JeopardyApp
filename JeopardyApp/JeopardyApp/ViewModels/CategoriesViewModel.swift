@@ -9,11 +9,11 @@ import JeopardyModel
 import SwiftUI
 
 class CategoriesViewModel: ObservableObject {
-
+    
     @Published var categories: [JeopardyModel.Category]
     private let model: Model
     var isDoubleJeopardy: Bool
-
+    
     
     init(_ model: Model, isDoubleJeopardy: Bool) {
         self.model = model

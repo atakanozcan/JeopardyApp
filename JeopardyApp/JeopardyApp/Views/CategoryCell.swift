@@ -19,6 +19,7 @@ struct CategoryCell: View {
                     Text(viewModel.getCategoryTitleWith(category.id))
                         .font(.custom("HelveticaNeue", size: 24).bold())
                         .foregroundColor(.white)
+                        .opacity(viewModel.getClueAmountForCategoryWith(category.id).isEmpty ? 0 : 1)
                 }
                 HStack {
                     ForEach(viewModel.getClueAmountForCategoryWith(category.id).indices, id: \.self) {
@@ -32,6 +33,7 @@ struct CategoryCell: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 7)
                 .foregroundColor(.white)
+                .opacity(viewModel.getClueAmountForCategoryWith(category.id).isEmpty ? 0 : 1)
         }.padding(15)
         .background(Rectangle().fill(Color("JeopardyColor")))
     }

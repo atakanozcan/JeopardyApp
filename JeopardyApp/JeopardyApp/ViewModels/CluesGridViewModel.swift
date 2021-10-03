@@ -27,17 +27,9 @@ class CluesGridViewModel: ObservableObject {
         category?.title.uppercased() ?? ""
     }
     
-    public func getQuestionWithClue(_ idx: Int) -> String {
-        clues[idx].question.uppercased()
-    }
-    
-    public func getDifficultyOfClue(_ idx: Int) -> String {
-        "$" + clues[idx].difficulty.description
-    }
-    
     public var answeredClues: [Clue] {
         var answered = [Clue]()
-    
+        
         for clue in clues {
             if model.answeredClues.contains(where: {$0.id == clue.id}) {
                 answered.append(clue)
@@ -46,24 +38,24 @@ class CluesGridViewModel: ObservableObject {
         return answered
     }
     
+    public var isGridFinished: Bool {
+        var finished: Bool = false
+        for clue in self.clues {
+            finished = finished && model.answeredClues.contains(where: { $0.id == clue.id })
+        }
+        return finished
+    }
+    
+    public func getQuestionWithClue(_ idx: Int) -> String {
+        clues[idx].question.uppercased()
+    }
+    
+    public func getDifficultyOfClue(_ idx: Int) -> String {
+        "$" + clues[idx].difficulty.description
+    }
+    
     public func answer(_ clueIdx: Int, _ answer: String) {
         model.answer(categoryId: self.categoryId, clueId: self.clues[clueIdx].id, answer: answer)
     }
-//    var selectedClue: JeopardyModel.Clue? {
-//        model?.clue(categoryId: categoryId, clueId: selectedClueId)
-//    }
-        
-//    var money: Int {
-//        model?.currentCash ?? 0
-//    }
-//    func answerCorrectly() {
-//        model?.answerCorrectly(categoryId: categoryId, clueId: selectedClueId)
-//        print(money.description)
-//    }
     
-//    func isAnswered() -> Bool {
-//        model?.isClueAnswered(clueId: selectedClueId!) ?? false
-//    }
-    
-
 }

@@ -33,10 +33,10 @@ struct ClueCell: View {
                     .border(Color.black, width: 3)
             } else {
                 Text(viewModel.getDifficultyOfClue(idx)).font(.custom("HelveticaNeue", size: 45).bold())
-                .foregroundColor(Color("JeopardySecondaryColor"))
-                .frame(width: 180, height: 100)
-                .background(
-                    Rectangle().fill(Color("JeopardyColor"))).border(Color.black, width: 3)
+                    .foregroundColor(Color("JeopardySecondaryColor"))
+                    .frame(width: 180, height: 100)
+                    .background(
+                        Rectangle().fill(Color("JeopardyColor"))).border(Color.black, width: 3)
             }
         }
     }
@@ -44,7 +44,7 @@ struct ClueCell: View {
 
 struct ClueCell_Previews: PreviewProvider {
     private static let model: Model = MockModel()
-
+    
     static var previews: some View {
         ClueCell(viewModel: CluesGridViewModel(model, model.jeopardy.first?.id ?? 0), idx: 0, state: .clue)
     }

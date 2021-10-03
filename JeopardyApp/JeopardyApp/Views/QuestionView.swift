@@ -10,11 +10,11 @@ import JeopardyModel
 
 struct QuestionView: View {
     @Environment(\.presentationMode) var presentationMode
-
+    
     @ObservedObject private var viewModel: CluesGridViewModel
     var clueIdx: Int
     @State var text: String = ""
-
+    
     init(viewModel: CluesGridViewModel, clueIdx: Int) {
         self.viewModel = viewModel
         self.clueIdx = clueIdx
@@ -29,7 +29,7 @@ struct QuestionView: View {
                 Spacer()
                 
                 ClueCell(viewModel: self.viewModel, idx: self.clueIdx, state: .clue)
-                                
+                
                 Spacer()
                 
                 VStack{
