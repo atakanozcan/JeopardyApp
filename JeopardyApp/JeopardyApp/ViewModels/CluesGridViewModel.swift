@@ -14,7 +14,7 @@ class CluesGridViewModel: ObservableObject {
     @Published var clues: [JeopardyModel.Clue]
     private var category: JeopardyModel.Category?
     @Published var categoryId: Int
-    @Published private var model: Model
+    private let model: Model
     
     init(_ model: Model, _ categoryId: Int) {
         self.model = model

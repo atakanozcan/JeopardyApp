@@ -10,12 +10,13 @@ import JeopardyModel
 
 struct GameView: View {
     @ObservedObject var viewModel = GameViewModel()
+    @EnvironmentObject var model: Model
     
     var body: some View {
         NavigationView {
             VStack {
                 Text("Welcome to Jeopardy")
-                NavigationLink(destination: CategoriesList(viewModel.model, isDoubleJeopardy: true).environmentObject(viewModel.model)) {
+                NavigationLink(destination: CategoriesList(viewModel: CategoriesViewModel(self.model, isDoubleJeopardy: false))) {
                         Text("Start Game")
                 }
             }

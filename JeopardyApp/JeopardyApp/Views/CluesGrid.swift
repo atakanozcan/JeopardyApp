@@ -14,8 +14,8 @@ struct CluesGrid: View {
     @State var openSheet: Bool = false
     @State var selectedClueIdx: Int?
     
-    init(_ model: JeopardyModel.Model, _ categoryId: Int) {
-        viewModel = CluesGridViewModel(model, categoryId)
+    init(viewModel: CluesGridViewModel) {
+        self.viewModel = viewModel
     }
     
     let columns = [
@@ -46,7 +46,7 @@ struct CluesGrid_Previews: PreviewProvider {
     private static let model: Model = MockModel()
 
     static var previews: some View {
-        CluesGrid(model, model.jeopardy.first?.id ?? 0).environmentObject(model)
+        CluesGrid(viewModel: CluesGridViewModel(model, model.jeopardy.first?.id ?? 0)).environmentObject(model)
         
     }
 }

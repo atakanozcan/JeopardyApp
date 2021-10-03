@@ -11,7 +11,7 @@ import SwiftUI
 class CategoriesViewModel: ObservableObject {
 
     @Published var categories: [JeopardyModel.Category]
-    @Published private var model: Model
+    private let model: Model
     var isDoubleJeopardy: Bool
 
     
