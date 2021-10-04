@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		009B49C527050CAF00515AB4 /* CategoriesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B49C427050CAF00515AB4 /* CategoriesList.swift */; };
-		009B49C727050EE700515AB4 /* CellState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B49C627050EE700515AB4 /* CellState.swift */; };
 		009B49C9270511B200515AB4 /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B49C8270511B200515AB4 /* CategoryCell.swift */; };
 		009B49CE2705198A00515AB4 /* JeopardyModel in Frameworks */ = {isa = PBXBuildFile; productRef = 009B49CD2705198A00515AB4 /* JeopardyModel */; };
 		009B49D42705EE3800515AB4 /* CluesGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B49D32705EE3800515AB4 /* CluesGrid.swift */; };
@@ -16,6 +15,9 @@
 		009B49DB2707388D00515AB4 /* CluesGridViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B49DA2707388D00515AB4 /* CluesGridViewModel.swift */; };
 		009B49DD270751C200515AB4 /* QuestionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B49DC270751C200515AB4 /* QuestionView.swift */; };
 		009B49DF2707562000515AB4 /* GameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009B49DE2707562000515AB4 /* GameViewModel.swift */; };
+		00A213B0270A78B300D2CC1A /* FinalJeopardyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A213AF270A78B300D2CC1A /* FinalJeopardyView.swift */; };
+		00A213B2270A84E000D2CC1A /* QuestionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A213B1270A84E000D2CC1A /* QuestionViewModel.swift */; };
+		00A213B4270A8A9C00D2CC1A /* FinalJeopardyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A213B3270A8A9C00D2CC1A /* FinalJeopardyViewModel.swift */; };
 		00C311052704820B0068B350 /* JeopardyAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C311042704820B0068B350 /* JeopardyAppApp.swift */; };
 		00C311072704820B0068B350 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C311062704820B0068B350 /* ContentView.swift */; };
 		00C311092704820D0068B350 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00C311082704820D0068B350 /* Assets.xcassets */; };
@@ -26,7 +28,6 @@
 
 /* Begin PBXFileReference section */
 		009B49C427050CAF00515AB4 /* CategoriesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesList.swift; sourceTree = "<group>"; };
-		009B49C627050EE700515AB4 /* CellState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellState.swift; sourceTree = "<group>"; };
 		009B49C8270511B200515AB4 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		009B49D22705BB9500515AB4 /* JeopardyModel */ = {isa = PBXFileReference; lastKnownFileType = folder; path = JeopardyModel; sourceTree = "<group>"; };
 		009B49D32705EE3800515AB4 /* CluesGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CluesGrid.swift; sourceTree = "<group>"; };
@@ -34,6 +35,9 @@
 		009B49DA2707388D00515AB4 /* CluesGridViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CluesGridViewModel.swift; sourceTree = "<group>"; };
 		009B49DC270751C200515AB4 /* QuestionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionView.swift; sourceTree = "<group>"; };
 		009B49DE2707562000515AB4 /* GameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewModel.swift; sourceTree = "<group>"; };
+		00A213AF270A78B300D2CC1A /* FinalJeopardyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalJeopardyView.swift; sourceTree = "<group>"; };
+		00A213B1270A84E000D2CC1A /* QuestionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewModel.swift; sourceTree = "<group>"; };
+		00A213B3270A8A9C00D2CC1A /* FinalJeopardyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinalJeopardyViewModel.swift; sourceTree = "<group>"; };
 		00C311012704820B0068B350 /* JeopardyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JeopardyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00C311042704820B0068B350 /* JeopardyAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JeopardyAppApp.swift; sourceTree = "<group>"; };
 		00C311062704820B0068B350 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -72,6 +76,7 @@
 				009B49D32705EE3800515AB4 /* CluesGrid.swift */,
 				00C31113270482990068B350 /* ClueCell.swift */,
 				009B49DC270751C200515AB4 /* QuestionView.swift */,
+				00A213AF270A78B300D2CC1A /* FinalJeopardyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -82,6 +87,8 @@
 				009B49DE2707562000515AB4 /* GameViewModel.swift */,
 				009B49D52705EFAF00515AB4 /* CategoriesViewModel.swift */,
 				009B49DA2707388D00515AB4 /* CluesGridViewModel.swift */,
+				00A213B1270A84E000D2CC1A /* QuestionViewModel.swift */,
+				00A213B3270A8A9C00D2CC1A /* FinalJeopardyViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -114,7 +121,6 @@
 				00C311082704820D0068B350 /* Assets.xcassets */,
 				00C3110D2704820D0068B350 /* Info.plist */,
 				00C3110A2704820D0068B350 /* Preview Content */,
-				009B49C627050EE700515AB4 /* CellState.swift */,
 			);
 			path = JeopardyApp;
 			sourceTree = "<group>";
@@ -203,10 +209,12 @@
 				009B49C527050CAF00515AB4 /* CategoriesList.swift in Sources */,
 				00C3111C2704A7830068B350 /* GameView.swift in Sources */,
 				00C311072704820B0068B350 /* ContentView.swift in Sources */,
+				00A213B0270A78B300D2CC1A /* FinalJeopardyView.swift in Sources */,
 				00C311052704820B0068B350 /* JeopardyAppApp.swift in Sources */,
 				009B49D42705EE3800515AB4 /* CluesGrid.swift in Sources */,
-				009B49C727050EE700515AB4 /* CellState.swift in Sources */,
+				00A213B2270A84E000D2CC1A /* QuestionViewModel.swift in Sources */,
 				00C31114270482990068B350 /* ClueCell.swift in Sources */,
+				00A213B4270A8A9C00D2CC1A /* FinalJeopardyViewModel.swift in Sources */,
 				009B49DD270751C200515AB4 /* QuestionView.swift in Sources */,
 				009B49DB2707388D00515AB4 /* CluesGridViewModel.swift in Sources */,
 				009B49D62705EFAF00515AB4 /* CategoriesViewModel.swift in Sources */,

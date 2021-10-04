@@ -9,15 +9,14 @@ import SwiftUI
 import JeopardyModel
 
 struct ClueCell: View {
-    @ObservedObject var viewModel: CluesGridViewModel
-    var idx: Int
+    @ObservedObject var viewModel: QuestionViewModel
     var state: CellState
     
     
     var body: some View {
         switch state {
         case .clue:
-            Text(viewModel.getQuestionWithClue(idx))
+            Text(viewModel.questionString)
                 .multilineTextAlignment(.center)
                 .font(.headline)
                 .foregroundColor(.white)
@@ -26,13 +25,13 @@ struct ClueCell: View {
                 .background(
                     Rectangle().fill(Color("JeopardyColor"))).border(Color.black, width: 3)
         case .difficulty:
-            if viewModel.answeredClues.contains(where: { $0.id == self.viewModel.clues[idx].id }) {
+            if viewModel.isAnswered {
                 Rectangle()
                     .fill(Color("JeopardyColor"))
                     .frame(width: 180, height: 100)
                     .border(Color.black, width: 3)
             } else {
-                Text(viewModel.getDifficultyOfClue(idx)).font(.custom("HelveticaNeue", size: 45).bold())
+                Text(viewModel.difficulty).font(.custom("HelveticaNeue", size: 45).bold())
                     .foregroundColor(Color("JeopardySecondaryColor"))
                     .frame(width: 180, height: 100)
                     .background(
@@ -42,10 +41,16 @@ struct ClueCell: View {
     }
 }
 
+enum CellState {
+    case clue
+    case difficulty
+
+}
+
 struct ClueCell_Previews: PreviewProvider {
-    private static let model: Model = MockModel()
+    private static let model: GameModel = MockModel()
     
     static var previews: some View {
-        ClueCell(viewModel: CluesGridViewModel(model, model.jeopardy.first?.id ?? 0), idx: 0, state: .clue)
+        ClueCell(viewModel: QuestionViewModel(model, categoryId: model.jeopardy.first?.id ?? 0, clueId: model.jeopardy.first?.clues.first?.id ?? 0), state: .clue)
     }
 }

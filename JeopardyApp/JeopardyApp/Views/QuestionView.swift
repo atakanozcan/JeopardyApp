@@ -11,13 +11,11 @@ import JeopardyModel
 struct QuestionView: View {
     @Environment(\.presentationMode) var presentationMode
     
-    @ObservedObject private var viewModel: CluesGridViewModel
-    var clueIdx: Int
+    @ObservedObject private var viewModel: QuestionViewModel
     @State var text: String = ""
     
-    init(viewModel: CluesGridViewModel, clueIdx: Int) {
+    init(viewModel: QuestionViewModel) {
         self.viewModel = viewModel
-        self.clueIdx = clueIdx
         UITextView.appearance().backgroundColor = .clear
     }
     
@@ -28,7 +26,7 @@ struct QuestionView: View {
             VStack {
                 Spacer()
                 
-                ClueCell(viewModel: self.viewModel, idx: self.clueIdx, state: .clue)
+                ClueCell(viewModel: self.viewModel, state: .clue)
                 
                 Spacer()
                 
@@ -54,7 +52,7 @@ struct QuestionView: View {
                         .padding(20)
                     
                     Button("Submit") {
-                        viewModel.answer(clueIdx, text)
+                        viewModel.answer(text)
                         presentationMode.wrappedValue.dismiss()
                     }.foregroundColor(Color("JeopardySecondaryBlue"))
                     
@@ -81,8 +79,8 @@ extension View {
 }
 
 struct QuestionView_Previews: PreviewProvider {
-    private static let model:Model = MockModel()
+    private static let model:GameModel = MockModel()
     static var previews: some View {
-        QuestionView(viewModel: CluesGridViewModel(model, model.jeopardy.first?.id ?? 0), clueIdx: 0)
+        QuestionView(viewModel: QuestionViewModel(model, categoryId: model.jeopardy.first?.id ?? 0, clueId: model.jeopardy.first?.clues.first?.id ?? 0))
     }
 }

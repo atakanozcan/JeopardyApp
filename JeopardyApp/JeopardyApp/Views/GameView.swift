@@ -10,7 +10,7 @@ import JeopardyModel
 
 struct GameView: View {
     @ObservedObject var viewModel = GameViewModel()
-    @EnvironmentObject var model: Model
+    @EnvironmentObject var model: GameModel
     
     var body: some View {
         VStack {
@@ -35,7 +35,7 @@ struct GameView: View {
 }
 
 struct MainView_Previews: PreviewProvider {
-    private static let model: JeopardyModel.Model = MockModel()
+    private static let model: JeopardyModel.GameModel = MockModel()
     static var previews: some View {
         GameView().environmentObject(model)
     }

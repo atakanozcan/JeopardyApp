@@ -10,12 +10,12 @@ import SwiftUI
 
 class CategoriesViewModel: ObservableObject {
     
-    @Published var categories: [JeopardyModel.Category]
-    private let model: Model
+    @Published var categories: [JCategory]
+    private let model: GameModel
     var isDoubleJeopardy: Bool
     
     
-    init(_ model: Model, isDoubleJeopardy: Bool) {
+    init(_ model: GameModel, isDoubleJeopardy: Bool) {
         self.model = model
         self.isDoubleJeopardy = isDoubleJeopardy
         self.categories = isDoubleJeopardy ? model.doubleJeopardy : model.jeopardy

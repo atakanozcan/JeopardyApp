@@ -10,14 +10,14 @@ import Foundation
 public struct Clue: Identifiable, Hashable {
     public let id: Int
     public let difficulty: Int
-    public let category: String
+    public let categoryId: Int
     public let question: String
     public let answer: String
     
-    public init(id: Int, difficulty: Int, category: String, question: String, answer: String) {
+    public init(id: Int, difficulty: Int, categoryId: Int, question: String, answer: String) {
         self.id = id
         self.difficulty = difficulty
-        self.category = category
+        self.categoryId = categoryId
         self.question = question
         self.answer = answer
     }

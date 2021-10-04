@@ -9,7 +9,7 @@ import SwiftUI
 import JeopardyModel
 
 struct CategoryCell: View {
-    @Binding var category: JeopardyModel.Category
+    @Binding var category: JCategory
     @ObservedObject var viewModel: CategoriesViewModel
     
     var body: some View {
@@ -40,7 +40,7 @@ struct CategoryCell: View {
 }
 
 struct CategoryCell_Previews: PreviewProvider {
-    private static let model: Model = MockModel()
+    private static let model: GameModel = MockModel()
     
     static var previews: some View {
         CategoryCell(category: .constant(model.jeopardy.first!), viewModel: CategoriesViewModel(model, isDoubleJeopardy: true))

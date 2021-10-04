@@ -1,35 +1,35 @@
 import Foundation
 import Combine
 
-public class Model: ObservableObject {
+public class GameModel: ObservableObject {
 
     @Published public internal(set) var currentCash: Int
-    @Published public var jeopardy: [Category]
-    @Published public var doubleJeopardy: [Category]
+    @Published public var jeopardy: [JCategory]
+    @Published public var doubleJeopardy: [JCategory]
     @Published public internal(set) var finalJeopardy: Clue
     
     @Published public internal(set) var answeredClues = [Clue]()
 
-    init(currentCash: Int, jeopardy: [Category], doubleJeopardy: [Category], finalJeopardy: Clue) {
+    init(currentCash: Int, jeopardy: [JCategory], doubleJeopardy: [JCategory], finalJeopardy: Clue) {
         self.currentCash = currentCash
         self.jeopardy = jeopardy
         self.doubleJeopardy = doubleJeopardy
         self.finalJeopardy = finalJeopardy
     }
 
-    public func category(_ id: Category.ID?) -> Category? {
+    public func category(_ id: JCategory.ID?) -> JCategory? {
         return (jeopardy + doubleJeopardy).first(where: { $0.id == id })
     }
     
-    public func categories(isDoubleJeopardy: Bool) -> [Category] {
+    public func categories(isDoubleJeopardy: Bool) -> [JCategory] {
         return isDoubleJeopardy ? doubleJeopardy : jeopardy
     }
     
-    public func clue(categoryId: Category.ID, clueId: Clue.ID?) -> Clue? {
+    public func clue(categoryId: JCategory.ID, clueId: Clue.ID?) -> Clue? {
         return category(categoryId)?.clues.first(where: { $0.id == clueId })
     }
         
-    public func answer(categoryId: Category.ID, clueId: Clue.ID?, answer: String) {
+    public func answer(categoryId: JCategory.ID, clueId: Clue.ID?, answer: String) {
         objectWillChange.send()
         if let clue = clue(categoryId: categoryId, clueId: clueId) {
             answeredClues.append(clue)
@@ -41,13 +41,22 @@ public class Model: ObservableObject {
         }
     }
     
-    public func isAnswered(categoryId: Category.ID, clueId: Clue.ID) -> Bool {
+    public func answerFinalJeopardy(answer: String, bet: Int) {
+        objectWillChange.send()
+        if answer.caseInsensitiveCompare(finalJeopardy.answer) == .orderedSame {
+            currentCash += bet
+        } else {
+            currentCash -= bet
+        }
+    }
+    
+    public func isAnswered(categoryId: JCategory.ID, clueId: Clue.ID) -> Bool {
         if let clue = clue(categoryId: categoryId, clueId: clueId) {
             return answeredClues.contains(where: { $0.id == clue.id })
         } else { return false }
     }
     
-    public func remainingAmountsForCategory(cstegoryId: Category.ID) -> [Int] {
+    public func remainingAmountsForCategory(cstegoryId: JCategory.ID) -> [Int] {
         var remainingAmts = [Int]()
         for clue in category(cstegoryId)?.clues ?? [] {
             if !answeredClues.contains(where: { $0.id == clue.id }) {

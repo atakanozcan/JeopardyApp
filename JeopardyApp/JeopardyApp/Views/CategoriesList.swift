@@ -10,7 +10,7 @@ import JeopardyModel
 
 struct CategoriesList: View {
     @ObservedObject var viewModel: CategoriesViewModel
-    @EnvironmentObject var model: JeopardyModel.Model
+    @EnvironmentObject var model: GameModel
     
     init(viewModel: CategoriesViewModel) {
         self.viewModel = viewModel
@@ -32,7 +32,7 @@ struct CategoriesList: View {
 }
 
 struct CategoriesList_Previews: PreviewProvider {
-    private static let model: Model = MockModel()
+    private static let model: GameModel = MockModel()
     
     static var previews: some View {
         NavigationView {

@@ -10,7 +10,7 @@ import JeopardyModel
 
 struct CluesGrid: View {
     @ObservedObject var viewModel: CluesGridViewModel
-    @EnvironmentObject var model: JeopardyModel.Model
+    @EnvironmentObject var model: GameModel
     @State var openSheet: Bool = false
     @State var selectedClueIdx: Int? = nil
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
@@ -25,11 +25,10 @@ struct CluesGrid: View {
     ]
     
     var body: some View {
-        
         VStack {
             LazyVGrid(columns: columns, spacing: 0) {
                 ForEach(viewModel.clues.indices,  id: \.self) { index in
-                    ClueCell(viewModel: viewModel, idx: index, state: .difficulty)
+                    ClueCell(viewModel: QuestionViewModel(self.model, categoryId: viewModel.categoryId, clueId: viewModel.clues[index].id), state: .difficulty)
                         .onTapGesture {
                             if !(viewModel.answeredClues.contains(where: { $0.id == viewModel.clues[index].id })) {
                                 self.selectedClueIdx = index
@@ -40,7 +39,7 @@ struct CluesGrid: View {
         }.sheet(item: $selectedClueIdx, onDismiss: {
             if viewModel.isGridFinished {
                 self.mode.wrappedValue.dismiss()
-            }}) { QuestionView(viewModel: self.viewModel, clueIdx: $0)
+            }}) { QuestionView(viewModel: QuestionViewModel(self.model, categoryId: viewModel.categoryId, clueId: viewModel.clues[$0].id))
             }.navigationTitle(viewModel.categoryTitle)
     }
 }
@@ -51,7 +50,7 @@ extension Int: Identifiable {
 
 
 struct CluesGrid_Previews: PreviewProvider {
-    private static let model: Model = MockModel()
+    private static let model: GameModel = MockModel()
     
     static var previews: some View {
         CluesGrid(viewModel: CluesGridViewModel(model, model.jeopardy.first?.id ?? 0)).environmentObject(model)

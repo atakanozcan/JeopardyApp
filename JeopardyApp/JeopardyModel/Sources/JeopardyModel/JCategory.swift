@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Category: Identifiable {
+public struct JCategory: Identifiable {
     public let title: String
     public let id: Int
     public let clues: [Clue]

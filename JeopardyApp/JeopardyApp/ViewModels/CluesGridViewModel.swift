@@ -11,12 +11,12 @@ import SwiftUI
 
 class CluesGridViewModel: ObservableObject {
     
-    @Published var clues: [JeopardyModel.Clue]
-    private var category: JeopardyModel.Category?
+    @Published var clues: [Clue]
+    private var category: JCategory?
     @Published var categoryId: Int
-    private let model: Model
+    private let model: GameModel
     
-    init(_ model: Model, _ categoryId: Int) {
+    init(_ model: GameModel, _ categoryId: Int) {
         self.model = model
         self.categoryId = categoryId
         self.category = model.category(categoryId)
@@ -44,18 +44,6 @@ class CluesGridViewModel: ObservableObject {
             finished = finished && model.answeredClues.contains(where: { $0.id == clue.id })
         }
         return finished
-    }
-    
-    public func getQuestionWithClue(_ idx: Int) -> String {
-        clues[idx].question.uppercased()
-    }
-    
-    public func getDifficultyOfClue(_ idx: Int) -> String {
-        "$" + clues[idx].difficulty.description
-    }
-    
-    public func answer(_ clueIdx: Int, _ answer: String) {
-        model.answer(categoryId: self.categoryId, clueId: self.clues[clueIdx].id, answer: answer)
     }
     
 }
