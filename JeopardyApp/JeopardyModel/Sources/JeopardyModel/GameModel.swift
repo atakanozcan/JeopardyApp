@@ -6,11 +6,11 @@ public class GameModel: ObservableObject {
     @Published public internal(set) var currentCash: Int
     @Published public var jeopardy: [JCategory]
     @Published public var doubleJeopardy: [JCategory]
-    @Published public internal(set) var finalJeopardy: Clue
-    
+    @Published public internal(set) var finalJeopardy: JCategory
     @Published public internal(set) var answeredClues = [Clue]()
+    @Published public internal(set) var finishedFinalJeopardy: Bool = false
 
-    init(currentCash: Int, jeopardy: [JCategory], doubleJeopardy: [JCategory], finalJeopardy: Clue) {
+    init(currentCash: Int, jeopardy: [JCategory], doubleJeopardy: [JCategory], finalJeopardy: JCategory) {
         self.currentCash = currentCash
         self.jeopardy = jeopardy
         self.doubleJeopardy = doubleJeopardy
@@ -18,7 +18,9 @@ public class GameModel: ObservableObject {
     }
 
     public func category(_ id: JCategory.ID?) -> JCategory? {
-        return (jeopardy + doubleJeopardy).first(where: { $0.id == id })
+        var categories = jeopardy + doubleJeopardy
+        categories.append(finalJeopardy)
+        return categories.first(where: { $0.id == id })
     }
     
     public func categories(isDoubleJeopardy: Bool) -> [JCategory] {
@@ -43,11 +45,12 @@ public class GameModel: ObservableObject {
     
     public func answerFinalJeopardy(answer: String, bet: Int) {
         objectWillChange.send()
-        if answer.caseInsensitiveCompare(finalJeopardy.answer) == .orderedSame {
+        if answer.caseInsensitiveCompare(finalJeopardy.clues.first?.answer ?? answer) == .orderedSame {
             currentCash += bet
         } else {
             currentCash -= bet
         }
+        finishedFinalJeopardy = true
     }
     
     public func isAnswered(categoryId: JCategory.ID, clueId: Clue.ID) -> Bool {
@@ -64,5 +67,35 @@ public class GameModel: ObservableObject {
             }
         }
         return remainingAmts
+    }
+    
+    public func isCategoryFinished(categoryId: JCategory.ID) -> Bool {
+        var finished = true
+        for clue in category(categoryId)?.clues ?? [] {
+            if !isAnswered(categoryId: categoryId, clueId: clue.id) {
+                finished = false
+            }
+        }
+        return finished
+    }
+    
+    public func isJeopardyFinished() -> Bool {
+        var finished = true
+        for category in jeopardy {
+            if !isCategoryFinished(categoryId: category.id) {
+                finished = false
+            }
+        }
+        return finished
+    }
+    
+    public func isDoubleJeopardyFinished() -> Bool {
+        var finished = true
+        for category in doubleJeopardy {
+            if !isCategoryFinished(categoryId: category.id) {
+                finished = false
+            }
+        }
+        return finished
     }
 }

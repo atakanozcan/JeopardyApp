@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Clue: Identifiable, Hashable {
+public struct Clue: Identifiable, Hashable, Codable {
     public let id: Int
     public let difficulty: Int
     public let categoryId: Int
@@ -21,4 +21,18 @@ public struct Clue: Identifiable, Hashable {
         self.question = question
         self.answer = answer
     }
+    
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(Int.self, forKey: .id)
+        self.question = try container.decode(String.self, forKey: .question)
+        self.answer = try container.decode(String.self, forKey: .answer)
+        self.categoryId = try container.decode(Int.self, forKey: .categoryId)
+        self.difficulty = 0
+    }
+    
+    enum CodingKeys: String, CodingKey {
+           case id, question, answer
+           case categoryId = "category_id"
+       }
 }
