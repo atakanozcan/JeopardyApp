@@ -29,7 +29,7 @@ public class MockModel: GameModel {
 
         let jeopardy = [category1, category2, category1, category2, category1, category2]
         
-        self.init(currentCash: 0, jeopardy: jeopardy, doubleJeopardy: jeopardy, finalJeopardy: clue11)
+        self.init(currentCash: 0, jeopardy: jeopardy, doubleJeopardy: jeopardy, finalJeopardy: category1)
         
 
     }
