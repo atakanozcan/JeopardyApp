@@ -11,6 +11,7 @@ import JeopardyModel
 struct CategoriesList: View {
     @ObservedObject var viewModel: CategoriesViewModel
     @EnvironmentObject var model: GameModel
+    //@Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
     init(viewModel: CategoriesViewModel) {
         self.viewModel = viewModel
@@ -27,7 +28,7 @@ struct CategoriesList: View {
                     ).listRowBackground( Rectangle().fill(Color("JeopardyColor"))).listRowSeparatorTint(.black)
                 }
             }
-        }.navigationBarBackButtonHidden(true)
+        }
     }
 }
 

@@ -40,4 +40,8 @@ class CategoriesViewModel: ObservableObject {
     func idOfTheCategoryWith(_ idx: Int) -> Int {
         return categories[idx].id
     }
+    
+    public var isCategoriesFinished: Bool {
+        isDoubleJeopardy ? model.isDoubleJeopardyFinished() : model.isJeopardyFinished()
+    }
 }

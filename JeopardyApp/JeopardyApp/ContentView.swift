@@ -6,16 +6,19 @@
 //
 
 import SwiftUI
+import JeopardyModel
 
 struct ContentView: View {
+    @EnvironmentObject var model: GameModel
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        VStack {GameView(viewModel: GameViewModel(self.model))}.environmentObject(self.model)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
+    private static let model: GameModel = MockModel()
     static var previews: some View {
-        ContentView()
+        ContentView().environmentObject(model)
     }
 }

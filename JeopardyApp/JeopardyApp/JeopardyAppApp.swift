@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import JeopardyModel
 
 @main
 struct JeopardyAppApp: App {
+    @StateObject public var model = GameModel()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(model)
         }
     }
 }

@@ -9,19 +9,42 @@ import SwiftUI
 import JeopardyModel
 
 struct GameView: View {
-    @ObservedObject var viewModel = GameViewModel()
     @EnvironmentObject var model: GameModel
+    @ObservedObject var viewModel: GameViewModel
     
     var body: some View {
         VStack {
             NavigationView {
-                VStack {
-                    Text("Welcome to Jeopardy")
-                    NavigationLink(destination: CategoriesList(viewModel: CategoriesViewModel(self.model, isDoubleJeopardy: false))) {
-                        Text("Start Game")
+                switch viewModel.gameState {
+                case .start:
+                    VStack {
+                        Text("Welcome to Jeopardy!")
+                        NavigationLink(destination: CategoriesList(viewModel: CategoriesViewModel(self.model, isDoubleJeopardy: false)).navigationTitle("Jeopardy!")) {
+                            Text("Start Game")
+                        }
                     }
-                }
+                case .finishedJeopardy:
+                    VStack {
+                        Text("You finished the Jeopardy Round")
+                        NavigationLink(destination: CategoriesList(viewModel: CategoriesViewModel(self.model, isDoubleJeopardy: true)).navigationTitle("Double Jeopardy!")) {
+                            Text("Continue to Double Jeopardy!")
+                        }
+                    }
+                case .finishDoubleJeopardy:
+                    VStack {
+                        Text("You finished the Double Jeopardy Round")
+                        NavigationLink(destination: FinalJeopardyView(viewModel: FinalJeopardyViewModel(model)).navigationTitle("Final Jeopardy!")) {
+                            Text("Continue to Final Jeopardy!")
+                        }
+                    }
+                case .finishedFinalJeopardy:
+                    VStack {
+                        Text("You finished the game!")
+                        Text("And won \(model.currentCash)")
+                    }
             }
+        }
+               
             VStack {
                 HStack {
                     Text("Current Cash:")
@@ -35,8 +58,8 @@ struct GameView: View {
 }
 
 struct MainView_Previews: PreviewProvider {
-    private static let model: JeopardyModel.GameModel = MockModel()
+    private static let model: GameModel = MockModel()
     static var previews: some View {
-        GameView().environmentObject(model)
+        GameView(viewModel: GameViewModel(model)).environmentObject(model)
     }
 }

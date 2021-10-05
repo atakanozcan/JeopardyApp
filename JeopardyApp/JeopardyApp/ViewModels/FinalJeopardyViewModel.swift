@@ -14,7 +14,7 @@ class FinalJeopardyViewModel: ObservableObject {
     
     init(_ model: GameModel) {
         self.model = model
-        self.clue = model.finalJeopardy
+        self.clue = model.finalJeopardy.clues.first ?? Clue(id: 0, difficulty: 0, categoryId: 0, question: "", answer: "")
     }
     
     public var categoryTitle: String {
