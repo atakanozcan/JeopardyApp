@@ -9,11 +9,10 @@ import SwiftUI
 import JeopardyModel
 
 struct QuestionView: View {
-    @Environment(\.presentationMode) var presentationMode
-    
     @ObservedObject private var viewModel: QuestionViewModel
     @State var text: String = ""
-    
+    @Environment(\.presentationMode) var presentationMode
+
     init(viewModel: QuestionViewModel) {
         self.viewModel = viewModel
         UITextView.appearance().backgroundColor = .clear
@@ -26,7 +25,7 @@ struct QuestionView: View {
             VStack {
                 Spacer()
                 
-                ClueCell(viewModel: self.viewModel, state: .clue)
+                ClueCell(viewModel: self.viewModel, state: .question)
                 
                 Spacer()
                 
@@ -40,7 +39,7 @@ struct QuestionView: View {
                             .foregroundColor(Color.white)
                             .padding(10)
                             .frame(width: 250, height: 100, alignment: .center)
-                        
+                            .disableAutocorrection(true)
                         
                         Image(systemName: "questionmark.square.fill")
                             .foregroundColor(Color("JeopardySecondaryColor"))
@@ -51,13 +50,24 @@ struct QuestionView: View {
                         RoundedRectangle(cornerRadius: 2).fill(Color("JeopardyColor"))).border(Color.black, width: 3)
                         .padding(20)
                     
-                    Button("Submit") {
-                        viewModel.answer(text)
-                        presentationMode.wrappedValue.dismiss()
-                    }.foregroundColor(Color("JeopardySecondaryBlue"))
-                    
+                    HStack {
+                        Spacer()
+
+                        Button("Pass") {
+                            viewModel.pass()
+                         presentationMode.wrappedValue.dismiss()
+                        }.foregroundColor(Color("JeopardyRed"))
+                        
+                        Spacer()
+                        
+                        Button("Submit") {
+                            viewModel.answer(text)
+                            presentationMode.wrappedValue.dismiss()
+                        }.foregroundColor(Color("JeopardySecondaryBlue"))
+                        
+                        Spacer()
+                    }
                 }
-                
                 Spacer()
             }
         }

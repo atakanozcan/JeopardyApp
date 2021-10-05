@@ -11,7 +11,6 @@ import JeopardyModel
 struct CluesGrid: View {
     @ObservedObject var viewModel: CluesGridViewModel
     @EnvironmentObject var model: GameModel
-    @State var openSheet: Bool = false
     @State var selectedClueIdx: Int? = nil
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
     
@@ -26,21 +25,19 @@ struct CluesGrid: View {
     
     var body: some View {
         VStack {
+            Text(viewModel.categoryTitle).font(.title).frame(alignment: .center)
             LazyVGrid(columns: columns, spacing: 0) {
                 ForEach(viewModel.clues.indices,  id: \.self) { index in
                     ClueCell(viewModel: QuestionViewModel(self.model, categoryId: viewModel.categoryId, clueId: viewModel.clues[index].id), state: .difficulty)
                         .onTapGesture {
-                            if !(viewModel.answeredClues.contains(where: { $0.id == viewModel.clues[index].id })) {
+                            if !(viewModel.answeredClues.contains(where: { $0.id == viewModel.clues[index].id })) { //if the clue is already answered, don't select it
                                 self.selectedClueIdx = index
                             }
                         }
                 }
             }
-        }.sheet(item: $selectedClueIdx, onDismiss: {
-            if viewModel.isGridFinished {
-                self.mode.wrappedValue.dismiss()
-            }}) { QuestionView(viewModel: QuestionViewModel(self.model, categoryId: viewModel.categoryId, clueId: viewModel.clues[$0].id))
-            }.navigationTitle(viewModel.categoryTitle)
+        }.sheet(item: $selectedClueIdx) { QuestionView(viewModel: QuestionViewModel(self.model, categoryId: viewModel.categoryId, clueId: viewModel.clues[$0].id))
+            }
     }
 }
 

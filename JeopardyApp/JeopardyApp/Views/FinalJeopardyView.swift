@@ -40,7 +40,7 @@ struct FinalJeopardyView: View {
                          .onReceive(Just(totalBet)) { newValue in
                              var filtered = newValue.filter { "0123456789".contains($0) }
                              if Int(filtered) ?? 0 >= viewModel.currentCash {
-                                 filtered = viewModel.currentCash.description
+                                 filtered = "0"
                              }
                              if filtered != newValue {
                                  self.totalBet = filtered

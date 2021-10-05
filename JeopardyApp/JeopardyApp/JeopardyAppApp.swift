@@ -10,11 +10,11 @@ import JeopardyModel
 
 @main
 struct JeopardyAppApp: App {
-    @StateObject public var model = GameModel()
-
+    @StateObject var model = GameModel()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(model)
+            GameView(model).environmentObject(model)
         }
     }
 }

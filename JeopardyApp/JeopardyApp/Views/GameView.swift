@@ -9,8 +9,11 @@ import SwiftUI
 import JeopardyModel
 
 struct GameView: View {
-    @EnvironmentObject var model: GameModel
     @ObservedObject var viewModel: GameViewModel
+    
+    init(_ model: GameModel) {
+        self.viewModel = GameViewModel(model)
+    }
     
     var body: some View {
         VStack {
@@ -18,48 +21,50 @@ struct GameView: View {
                 switch viewModel.gameState {
                 case .start:
                     VStack {
-                        Text("Welcome to Jeopardy!")
-                        NavigationLink(destination: CategoriesList(viewModel: CategoriesViewModel(self.model, isDoubleJeopardy: false)).navigationTitle("Jeopardy!")) {
-                            Text("Start Game")
+                        Text("This is Jeopardy!").font(.largeTitle)
+                        Text("Today's contestant is you!").font(.headline)
+                        NavigationLink(destination: CategoriesList(viewModel: CategoriesViewModel(viewModel.model, isDoubleJeopardy: false)).navigationTitle("Jeopardy!")) {
+                            Text("Start Playing")
                         }
                     }
                 case .finishedJeopardy:
                     VStack {
                         Text("You finished the Jeopardy Round")
-                        NavigationLink(destination: CategoriesList(viewModel: CategoriesViewModel(self.model, isDoubleJeopardy: true)).navigationTitle("Double Jeopardy!")) {
+                        NavigationLink(destination: CategoriesList(viewModel: CategoriesViewModel(viewModel.model, isDoubleJeopardy: true)).navigationTitle("Double Jeopardy!")) {
                             Text("Continue to Double Jeopardy!")
                         }
                     }
-                case .finishDoubleJeopardy:
+                case .finishedDoubleJeopardy:
                     VStack {
                         Text("You finished the Double Jeopardy Round")
-                        NavigationLink(destination: FinalJeopardyView(viewModel: FinalJeopardyViewModel(model)).navigationTitle("Final Jeopardy!")) {
+                        NavigationLink(destination: FinalJeopardyView(viewModel: FinalJeopardyViewModel(viewModel.model)).navigationTitle("Final Jeopardy!")) {
                             Text("Continue to Final Jeopardy!")
                         }
                     }
                 case .finishedFinalJeopardy:
                     VStack {
                         Text("You finished the game!")
-                        Text("And won \(model.currentCash)")
+                        Text("And won \(viewModel.currentCash) dollars!")
+                        Button("Play again!") {
+                            viewModel.restartGame()
+                        }
                     }
+                }
             }
-        }
-               
             VStack {
                 HStack {
                     Text("Current Cash:")
-                    Text(model.currentCash.description)
+                    Text(viewModel.currentCash.description)
                 }
             }
             Spacer()
-        }
-        
+        }.onAppear { viewModel.onAppear() }
     }
 }
 
 struct MainView_Previews: PreviewProvider {
     private static let model: GameModel = MockModel()
     static var previews: some View {
-        GameView(viewModel: GameViewModel(model)).environmentObject(model)
+        GameView(model).environmentObject(model)
     }
 }

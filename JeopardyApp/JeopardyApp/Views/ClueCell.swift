@@ -15,7 +15,7 @@ struct ClueCell: View {
     
     var body: some View {
         switch state {
-        case .clue:
+        case .question:
             Text(viewModel.questionString)
                 .multilineTextAlignment(.center)
                 .font(.headline)
@@ -42,7 +42,7 @@ struct ClueCell: View {
 }
 
 enum CellState {
-    case clue
+    case question
     case difficulty
 
 }
@@ -51,6 +51,6 @@ struct ClueCell_Previews: PreviewProvider {
     private static let model: GameModel = MockModel()
     
     static var previews: some View {
-        ClueCell(viewModel: QuestionViewModel(model, categoryId: model.jeopardy.first?.id ?? 0, clueId: model.jeopardy.first?.clues.first?.id ?? 0), state: .clue)
+        ClueCell(viewModel: QuestionViewModel(model, categoryId: model.jeopardy.first?.id ?? 0, clueId: model.jeopardy.first?.clues.first?.id ?? 0), state: .question)
     }
 }
