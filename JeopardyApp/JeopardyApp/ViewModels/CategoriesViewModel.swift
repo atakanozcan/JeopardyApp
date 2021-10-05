@@ -21,6 +21,10 @@ class CategoriesViewModel: ObservableObject {
         self.categories = isDoubleJeopardy ? model.doubleJeopardy : model.jeopardy
     }
     
+    public var isCategoriesFinished: Bool {
+        isDoubleJeopardy ? model.isDoubleJeopardyFinished() : model.isJeopardyFinished()
+    }
+    
     func getCategoryTitleWith(_ categoryId: Int) -> String {
         return categories.first(where: { $0.id == categoryId })?.title.uppercased() ?? ""
     }
@@ -39,9 +43,5 @@ class CategoriesViewModel: ObservableObject {
     
     func idOfTheCategoryWith(_ idx: Int) -> Int {
         return categories[idx].id
-    }
-    
-    public var isCategoriesFinished: Bool {
-        isDoubleJeopardy ? model.isDoubleJeopardyFinished() : model.isJeopardyFinished()
     }
 }

@@ -40,10 +40,14 @@ class QuestionViewModel: ObservableObject {
     public var isFinalJeopardy: Bool {
         finalBet != nil
     }
+    
     public func answer(_ answer: String) {
         isFinalJeopardy ?
         model.answerFinalJeopardy(answer: answer, bet: finalBet ?? 0) :
         model.answer(categoryId: self.clue.categoryId, clueId: self.clue.id, answer: answer)
     }
     
+    public func pass() {
+        model.pass(categoryId: self.clue.categoryId, clueId: self.clue.id)
+    }
 }

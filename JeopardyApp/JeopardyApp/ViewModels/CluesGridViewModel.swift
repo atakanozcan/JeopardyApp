@@ -12,8 +12,8 @@ import SwiftUI
 class CluesGridViewModel: ObservableObject {
     
     @Published var clues: [Clue]
-    private var category: JCategory?
     @Published var categoryId: Int
+    private var category: JCategory?
     private let model: GameModel
     
     init(_ model: GameModel, _ categoryId: Int) {
@@ -29,7 +29,6 @@ class CluesGridViewModel: ObservableObject {
     
     public var answeredClues: [Clue] {
         var answered = [Clue]()
-        
         for clue in clues {
             if model.answeredClues.contains(where: {$0.id == clue.id}) {
                 answered.append(clue)
