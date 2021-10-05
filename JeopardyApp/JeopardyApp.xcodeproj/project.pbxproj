@@ -21,7 +21,6 @@
 		00A213B6270B471100D2CC1A /* GameService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A213B5270B471100D2CC1A /* GameService.swift */; };
 		00A213B8270B47CF00D2CC1A /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A213B7270B47CF00D2CC1A /* Endpoint.swift */; };
 		00C311052704820B0068B350 /* JeopardyAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C311042704820B0068B350 /* JeopardyAppApp.swift */; };
-		00C311072704820B0068B350 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C311062704820B0068B350 /* ContentView.swift */; };
 		00C311092704820D0068B350 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00C311082704820D0068B350 /* Assets.xcassets */; };
 		00C3110C2704820D0068B350 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00C3110B2704820D0068B350 /* Preview Assets.xcassets */; };
 		00C31114270482990068B350 /* ClueCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C31113270482990068B350 /* ClueCell.swift */; };
@@ -44,7 +43,6 @@
 		00A213B7270B47CF00D2CC1A /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		00C311012704820B0068B350 /* JeopardyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JeopardyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00C311042704820B0068B350 /* JeopardyAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JeopardyAppApp.swift; sourceTree = "<group>"; };
-		00C311062704820B0068B350 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		00C311082704820D0068B350 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00C3110B2704820D0068B350 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		00C3110D2704820D0068B350 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -64,6 +62,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0045263B270CE1D200E92F68 /* GameService */ = {
+			isa = PBXGroup;
+			children = (
+				00A213B5270B471100D2CC1A /* GameService.swift */,
+				00A213B7270B47CF00D2CC1A /* Endpoint.swift */,
+			);
+			path = GameService;
+			sourceTree = "<group>";
+		};
 		009B49CC2705198A00515AB4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -121,12 +128,10 @@
 				009B49D82707386100515AB4 /* Views */,
 				009B49D92707387C00515AB4 /* ViewModels */,
 				00C311042704820B0068B350 /* JeopardyAppApp.swift */,
-				00C311062704820B0068B350 /* ContentView.swift */,
+				0045263B270CE1D200E92F68 /* GameService */,
 				00C311082704820D0068B350 /* Assets.xcassets */,
 				00C3110D2704820D0068B350 /* Info.plist */,
 				00C3110A2704820D0068B350 /* Preview Content */,
-				00A213B5270B471100D2CC1A /* GameService.swift */,
-				00A213B7270B47CF00D2CC1A /* Endpoint.swift */,
 			);
 			path = JeopardyApp;
 			sourceTree = "<group>";
@@ -214,7 +219,6 @@
 				009B49DF2707562000515AB4 /* GameViewModel.swift in Sources */,
 				009B49C527050CAF00515AB4 /* CategoriesList.swift in Sources */,
 				00C3111C2704A7830068B350 /* GameView.swift in Sources */,
-				00C311072704820B0068B350 /* ContentView.swift in Sources */,
 				00A213B0270A78B300D2CC1A /* FinalJeopardyView.swift in Sources */,
 				00A213B6270B471100D2CC1A /* GameService.swift in Sources */,
 				00C311052704820B0068B350 /* JeopardyAppApp.swift in Sources */,
