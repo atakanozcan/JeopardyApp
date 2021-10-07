@@ -12,6 +12,7 @@ import SwiftUI
 class GameViewModel: ObservableObject {
     public var model: GameModel
     private var gameService: GameService
+    @Published var showNetworkError = false
     
     init(_ model: GameModel, gameService: GameService = GameService()) {
         self.model = model
@@ -42,8 +43,13 @@ class GameViewModel: ObservableObject {
     @MainActor
     func getGame() {
         Task {
-            let newModel = try await self.gameService.fetchANewGame()
-            model.save(newModel)
+            do {
+                let newModel = try await self.gameService.fetchANewGame()
+                model.save(newModel)
+            } catch {
+                print("A network error occurred while fetching the clues: \(error)")
+                showNetworkError.toggle()
+            }
         }
     }
     

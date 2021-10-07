@@ -58,7 +58,9 @@ struct GameView: View {
                 }
             }
             Spacer()
-        }.onAppear { viewModel.onAppear() }
+        }.onAppear { viewModel.onAppear() }.alert("A network error occurred while fetching the questions.", isPresented: $viewModel.showNetworkError) {
+            Button("Try again") { viewModel.onAppear() }
+        }
     }
 }
 
